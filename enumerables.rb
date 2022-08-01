@@ -51,7 +51,7 @@ class Array
         end
     end
 
-    for i in (0...self.length) do 
+    for i in (0...self.length) do
         zip_arr[i].unshift(self[i])
     end
 
@@ -62,26 +62,60 @@ class Array
     rotated = []
 
     if amount > 0
-        amount.times do 
-            first = self[0]
-            self.delete_at(0)
-            rotated << first
-            p first
-        end
+      amount.times do
+        first = self[0]
+        self.delete_at(0)
+        rotated << first
+        p first
+      end
+    else
+      (-amount).times do
+        last = self.pop
+        self.unshift(last)
+      end
+      return self
     end
-
     return self + rotated
+  end
+
+  def my_join(sep="")
+    new_str = ""
+    i=0
+    self.my_each do |el|
+      if sep == ""
+        new_str += el
+      else
+        if i < self.length - 1
+          new_str += el + sep
+        else
+          new_str += el
+        end
+      end
+      i += 1
+    end
+    new_str
+  end
+
+  def my_reverse
+    new_arr = []
+    (self.length-1).downto(0).to_a.my_each do |index|
+      new_arr << self[index]
+    end
+    new_arr
+  end
+
+  def factors(num)
 
   end
 
 end
 
-#my_rotate
-a = [ "a", "b", "c", "d" ]
-# p a.my_rotate         #=> ["b", "c", "d", "a"]
-p a.my_rotate(2)      #=> ["c", "d", "a", "b"]
-# p a.my_rotate(-3)     #=> ["b", "c", "d", "a"]
-# a.my_rotate(15)     #=> ["d", "a", "b", "c"]
+p [ "a", "b", "c" ].my_reverse   #=> ["c", "b", "a"]
+p [ 1 ].my_reverse               #=> [1]
+
+
+
+
 
 
 
