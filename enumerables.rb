@@ -32,20 +32,16 @@ class Array
 
   def my_flatten
     flattened = []
-    self[0] if !self[0].is_a?(Array)
-    return [] if self[0].length == 0
-    # flattened = self[0].my_flatten + self[1..-1].my_flatten
-    self.each { |el| flattened += el.my_flatten}
+    self.each do |subarr|
+      if !subarr.is_a?(Array)
+        flattened << subarr #single el, not array
+      else
+        flattened += subarr.my_flatten
+      end
+    end
     flattened
-
   end
-  # def my_flatten(array=self)
-  #   return [self] if !self.is_a?(Array)
-  #   return [] if self.length == 0
-  # end
-
 end
-
 p [1, 2, 3, [4, [5, 6]], [[[7]], 8]].my_flatten
 
 
