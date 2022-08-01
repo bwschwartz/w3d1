@@ -1,3 +1,4 @@
+# Some message from payton
 class Array
   def my_each(&prc)
     i = 0
@@ -31,7 +32,7 @@ class Array
 
   def my_flatten
     flattened = []
-    return self[0] if !self[0].is_a?(Array)
+    self[0] if !self[0].is_a?(Array)
     return [] if self[0].length == 0
     # flattened = self[0].my_flatten + self[1..-1].my_flatten
     self.each { |el| flattened += el.my_flatten}
@@ -46,6 +47,7 @@ class Array
 end
 
 p [1, 2, 3, [4, [5, 6]], [[[7]], 8]].my_flatten
+
 
 
 
