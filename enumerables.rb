@@ -104,18 +104,29 @@ class Array
     new_arr
   end
 
-  def factors(num)
-
+  def bubble_sort!(&prc)
+    sorted = false
+    while !sorted
+        sorted = true
+        for i in (0...self.length-1)
+            if prc.call(self[i]) < prc.call(self[i+1])
+                self[i], self[i+1] = self[i+1], self[i]
+                sorted = false
+            end
+        end
+    end
+    return self
   end
 
 end
 
-p [ "a", "b", "c" ].my_reverse   #=> ["c", "b", "a"]
-p [ 1 ].my_reverse               #=> [1]
+############
 
+p [1, 2, 4, 6, 8, 5].bubble_sort!{|ele| ele + 5}
 
-
-
+def factors(num)
+    (1..num).select {|i| num % i == 0}
+end
 
 
 
