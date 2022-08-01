@@ -41,13 +41,47 @@ class Array
     end
     flattened
   end
+# p [1, 2, 3, [4, [5, 6]], [[[7]], 8]].my_flatten
+
+  def my_zip(*arrs)
+    zip_arr = Array.new(self.length) {Array.new()}
+    arrs.each_with_index do |arr, i|
+        arr.each_with_index do |ele, j|
+            zip_arr[j] << ele if j < zip_arr.length
+        end
+    end
+
+    for i in (0...self.length) do 
+        zip_arr[i].unshift(self[i])
+    end
+
+    return zip_arr
+  end
+
+  def my_rotate(amount=1)
+    rotated = []
+
+    if amount > 0
+        amount.times do 
+            first = self[0]
+            self.delete_at(0)
+            rotated << first
+            p first
+        end
+    end
+
+    return self + rotated
+
+  end
+
 end
-p [1, 2, 3, [4, [5, 6]], [[[7]], 8]].my_flatten
 
-
-
-
-
+#my_rotate
+a = [ "a", "b", "c", "d" ]
+# p a.my_rotate         #=> ["b", "c", "d", "a"]
+p a.my_rotate(2)      #=> ["c", "d", "a", "b"]
+# p a.my_rotate(-3)     #=> ["b", "c", "d", "a"]
+# a.my_rotate(15)     #=> ["d", "a", "b", "c"]
 
 
 
