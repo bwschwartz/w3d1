@@ -29,15 +29,19 @@ class Array
     true
   end
 
-  def my_flatten(array=self)
-    return [self] if !self.is_a?(Array)
-    return [] if self.length == 0
+  def my_flatten
+    flattened = []
+    return self[0] if !self[0].is_a?(Array)
+    return [] if self[0].length == 0
+    # flattened = self[0].my_flatten + self[1..-1].my_flatten
+    self.each { |el| flattened += el.my_flatten}
+    flattened
 
-    # self = self[0].my_flatten + self[1..-1].my_flatten
-    new_arr = []
-    array.my_each { |el| new_arr += my_flatten([el]) }
-    new_arr
   end
+  # def my_flatten(array=self)
+  #   return [self] if !self.is_a?(Array)
+  #   return [] if self.length == 0
+  # end
 
 end
 
